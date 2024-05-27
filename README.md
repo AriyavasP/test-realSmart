@@ -1,0 +1,60 @@
+# create docker-compose.ymp
+
+copy my code to docker-compose.ymp
+
+
+<-- docker-compose -->
+
+version: '3.8'
+
+services:
+  login-system:
+    build:
+      context: ./login-system 
+      dockerfile: Dockerfile 
+    image: login-system-app
+    ports:
+      - '3000:3000'
+    environment:
+      SECRET_TOKEN: test
+      HOST_SERVER: http://localhost
+      PORT: 3000
+      MAILSERVER_API: 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
+      MONGODB: mongodb://root:example@mongo:27017/mydatabase?authSource=admin
+      FRONTEND_URL: http://localhost:80
+    depends_on:
+      - mongo
+    restart: always
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+  login-ui:
+    build:
+      context: ./login-ui 
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=http://login-system:3000
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    driver: bridge
