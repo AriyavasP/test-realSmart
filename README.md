@@ -1,5 +1,7 @@
 run docker compose up
 
+open browser with localhost port 80
+
 # create docker-compose.ymp
 
 if not seen copy my code to docker-compose.ymp
