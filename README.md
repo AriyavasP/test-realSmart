@@ -1,3 +1,5 @@
+run docker compose up
+
 # create docker-compose.ymp
 
 copy my code to docker-compose.ymp
