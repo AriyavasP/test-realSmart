@@ -12,7 +12,7 @@ services:
       SECRET_TOKEN: test
       HOST_SERVER: http://localhost
       PORT: 3000
-      MAILSERVER_API: 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
+      MAILSERVER_API: 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
       MONGODB: mongodb://root:example@mongo:27017/mydatabase?authSource=admin
       FRONTEND_URL: http://localhost:80
     depends_on:
